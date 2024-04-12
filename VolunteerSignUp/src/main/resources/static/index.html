@@ -1,0 +1,49 @@
+ <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Volunteer Sign-up</title>
+    <style>
+        
+        select#shifts {
+            width: 300px; 
+            padding: 5px; 
+            box-sizing: border-box; 
+        }
+    </style>
+</head>
+<body>
+    <h1>Volunteer Sign-up</h1>
+    <script>
+    function validateForm() {
+        var name = document.getElementById("name").value;
+        var shifts = document.getElementById("shifts").value;
+
+        if (name.trim() === '') {
+            alert("Please enter your name.");
+            return false;
+        }
+
+        if (shifts.length === 0) {
+            alert("Please select at least one shift.");
+            return false;
+        }
+
+        return true;
+    }
+</script>
+    <form th:action="@{/signup}" th:object="${volunteer}" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" th:field="*{name}">
+        <br>
+        <label for="shifts">Choose Shifts:</label>
+        <select id="shifts" name="shifts" multiple="multiple" th:field="*{shifts}">
+            <option value="Driving Clients">Driving Clients</option>
+            <option value="Sorting Donations">Sorting Donations</option>
+            <option value="Interpreting">Interpreting</option>
+        </select>
+        <br>
+        <button type="submit">Sign Up</button>
+    </form>
+</body>
+</html>
